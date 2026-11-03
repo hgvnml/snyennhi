@@ -1747,69 +1747,7 @@
       cakeAnimFrame = null;
     }
 
-    // 9. Nhạc nền (Hỗ trợ cả file .mp3 và giai điệu hộp nhạc dự phòng)
-    function startBackgroundMusic() {
-      const audioEl = document.getElementById("bgMusicAudio");
-      isMusicPlaying = true;
-      updateMusicButtonUI();
-
-      if (CONFIG.musicUrl) {
-        audioEl.play().catch(() => {
-          startSynthBirthdayMelody();
-        });
-      } else {
-        startSynthBirthdayMelody();
-      }
-    }
-
-    function startSynthBirthdayMelody() {
-      if (melodyTimer) return;
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContextClass) return;
-      if (!audioCtx) audioCtx = new AudioContextClass();
-
-      const notes = [261.63, 261.63, 293.66, 261.63, 349.23, 329.63, 261.63, 261.63, 293.66, 261.63, 392.0, 349.23];
-      let noteIdx = 0;
-
-      melodyTimer = setInterval(() => {
-        if (!isMusicPlaying) return;
-        try {
-          if (audioCtx.state === "suspended") audioCtx.resume();
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = "sine";
-          osc.frequency.value = notes[noteIdx % notes.length];
-          gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.0008, audioCtx.currentTime + 0.55);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start();
-          osc.stop(audioCtx.currentTime + 0.55);
-          noteIdx++;
-        } catch (e) {}
-      }, 620);
-    }
-
-    function toggleBackgroundMusic() {
-      const audioEl = document.getElementById("bgMusicAudio");
-      isMusicPlaying = !isMusicPlaying;
-      if (isMusicPlaying) {
-        startBackgroundMusic();
-      } else {
-        audioEl.pause();
-        if (melodyTimer) {
-          clearInterval(melodyTimer);
-          melodyTimer = null;
-        }
-      }
-      updateMusicButtonUI();
-    }
-
-    function updateMusicButtonUI() {
-      const icon = document.getElementById("musicIcon");
-      if (!icon) return;
-      icon.className = isMusicPlaying ? "fa-solid fa-music text-xs animate-spin" : "fa-solid fa-volume-xmark text-xs text-zinc-400";
-    }
+    
 
     // ============================================================================
     // GẮN SỰ KIỆN TƯƠNG TÁC
