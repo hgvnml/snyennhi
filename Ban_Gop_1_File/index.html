@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Món Quà Sinh Nhật Đặc Biệt 💛</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Google Fonts Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style id="appCoreStyles">
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #050505;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100dvh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-frame {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      height: 100dvh;
+      max-height: 880px;
+      background-color: #000000;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 50px rgba(255, 204, 0, 0.08);
+    }
+
+    @media (min-width: 500px) {
+      .phone-frame {
+        height: 94dvh;
+        border-radius: 38px;
+        border: 6px solid #1f1f23;
+      }
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    @keyframes pulseYellowGlow {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 35px 8px rgba(234, 179, 8, 0.45), 0 0 80px 20px rgba(234, 179, 8, 0.2);
+      }
+      50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 50px 15px rgba(234, 179, 8, 0.75), 0 0 110px 35px rgba(234, 179, 8, 0.35);
+      }
+    }
+
+    .intro-heart-btn {
+      animation: pulseYellowGlow 2.2s infinite ease-in-out;
+    }
+
+    /* Hệ thống quản lý màn hình chính và modal tách biệt hoàn toàn */
+    .screen-layer {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background-color: #000000;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: scale(0.98);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+      z-index: 10;
+    }
+
+    .screen-layer.screen-active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: scale(1);
+      z-index: 30;
+    }
+
+    .modal-layer {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: scale(0.96);
+      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+      z-index: 70;
+    }
+
+    .modal-layer.modal-active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    /* Chế độ lưới ảnh xếp chồng (Overlap) */
+    .grid-stacked-mode > div:nth-child(n+4) {
+      margin-top: -26px;
+      box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.75);
+      border-top: 1.5px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* Hiệu ứng lắc lư sticker cảm xúc trong Rollcall */
+    @keyframes stickerWobble {
+      0%, 100% {
+        transform: rotate(-10deg) scale(1);
+      }
+      50% {
+        transform: rotate(10deg) scale(1.08);
+      }
+    }
+
+    .rollcall-sticker {
+      animation: stickerWobble 1.8s infinite ease-in-out;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+    }
+
+    @keyframes floatUpAndSway {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.5) rotate(-10deg);
+      }
+      15% {
+        opacity: 1;
+        transform: translateY(0px) scale(1.05) rotate(8deg);
+      }
+      50% {
+        opacity: 0.95;
+        transform: translateY(-220px) translateX(22px) scale(1) rotate(-8deg);
+      }
+      85% {
+        opacity: 0.8;
+        transform: translateY(-480px) translateX(-18px) scale(0.95) rotate(10deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-680px) translateX(10px) scale(0.7) rotate(0deg);
+      }
+    }
+
+    .floating-particle {
+      position: absolute;
+      bottom: 80px;
+      pointer-events: none;
+      z-index: 80;
+      animation: floatUpAndSway 3.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+      }
+      30% {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
+    }
+
+    .typing-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #9ca3af;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 2px;
+      animation: typingBounce 1.3s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.18s;
+    }
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.36s;
+    }
+
+    @keyframes popInMessage {
+      0% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .chat-bubble-enter {
+      animation: popInMessage 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes lockedShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .locked-chat-shake {
+      animation: lockedShake 0.36s ease-in-out;
+    }
+
+    .locket-rainbow-ring {
+      background: conic-gradient(
+        from 180deg,
+        #38bdf8,
+        #818cf8,
+        #e879f9,
+        #fb7185,
+        #facc15,
+        #4ade80,
+        #38bdf8
+      );
+      padding: 3.5px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cake-scene {
+      perspective: 1100px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .cake-3d-wrapper {
+      position: relative;
+      width: 260px;
+      height: 300px;
+      transform-style: preserve-3d;
+      transform: rotateX(-13deg) rotateY(0deg);
+      transition: transform 0.08s linear;
+    }
+
+    .cake-tier {
+      position: absolute;
+      left: 50%;
+      transform-style: preserve-3d;
+    }
+
+    .cake-panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      backface-visibility: visible;
+      overflow: hidden;
+      border-top: 2px solid rgba(255, 255, 255, 0.75);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.35);
+      background-color: #27272a;
+    }
+
+    .cake-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cake-lid {
+      position: absolute;
+      border-radius: 50%;
+      transform: rotateX(90deg);
+      background: radial-gradient(circle, #fff5f7 0%, #fbcfe8 55%, #f472b6 100%);
+      box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.9), 0 0 20px rgba(251, 113, 133, 0.4);
+      overflow: hidden;
+    }
+
+    .candle-3d {
+      position: absolute;
+      left: 50%;
+      top: -18px;
+      width: 12px;
+      height: 54px;
+      margin-left: -6px;
+      background: repeating-linear-gradient(
+        45deg,
+        #ffffff,
+        #ffffff 5px,
+        #fb7185 5px,
+        #fb7185 10px
+      );
+      border-radius: 4px;
+      transform-style: preserve-3d;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+    }
+
+    @keyframes flameFlicker {
+      0%, 100% {
+        transform: translateX(-50%) scale(1) rotate(-2deg);
+        box-shadow: 0 0 20px 6px rgba(251, 191, 36, 0.85), 0 0 45px 15px rgba(245, 158, 11, 0.55);
+      }
+      50% {
+        transform: translateX(-50%) scale(1.12, 0.94) rotate(2deg);
+        box-shadow: 0 0 28px 10px rgba(251, 191, 36, 0.95), 0 0 60px 22px rgba(234, 88, 12, 0.65);
+      }
+    }
+
+    .candle-flame {
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      width: 15px;
+      height: 24px;
+      background: radial-gradient(ellipse at bottom, #ffffff 15%, #fde047 50%, #f97316 90%);
+      border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+      animation: flameFlicker 0.8s infinite alternate ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="phone-frame" id="appFrame">
+    <!-- 1. MÀN HÌNH INTRO (Có sẵn class screen-active để hiển thị ngay khi mở trang) -->
+    <div id="screenIntro" class="screen-layer screen-active bg-black flex flex-col items-center justify-center">
+      <button
+        id="btnStartIntro"
+        class="intro-heart-btn w-20 h-20 rounded-[22px] bg-[#eab308] flex items-center justify-center cursor-pointer focus:outline-none transition-transform active:scale-90"
+        title="Chạm để mở quà"
+      >
+        <i class="fa-solid fa-heart text-[#422006] text-4xl"></i>
+      </button>
+      <p class="mt-7 text-xs text-zinc-400 tracking-widest uppercase animate-pulse">Chạm vào trái tim để mở</p>
+    </div>
+
+    <!-- 2. MÀN HÌNH CHÍNH LƯỚI ẢNH CHUẨN LOCKET -->
+    <div id="screenMainGrid" class="screen-layer bg-black flex flex-col justify-between">
+      <!-- Header nổi mờ trên cùng giống video thực tế -->
+      <div class="flex items-center justify-between px-4 pt-3.5 pb-2.5 bg-gradient-to-b from-black/95 via-black/75 to-transparent z-20">
+        <button
+          id="btnOpenRollcall"
+          class="relative w-11 h-11 rounded-full bg-[#1c1c1e]/95 flex items-center justify-center text-white hover:bg-zinc-800 active:scale-90 transition shadow-lg"
+          title="Mở Rollcall"
+        >
+          <i class="fa-solid fa-bullhorn text-base -rotate-12"></i>
+          <span class="absolute -top-1.5 -right-2 bg-[#e598eb] text-black text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow border border-black leading-none">
+            MỚI
+          </span>
+        </button>
+
+        <button
+          id="btnPeopleFilter"
+          class="px-5 py-2.5 rounded-full bg-[#1c1c1e]/95 hover:bg-zinc-800 active:scale-95 transition flex items-center gap-2 text-[15px] font-bold text-white shadow-lg"
+        >
+          <span id="filterButtonLabel">Tất cả bạn bè</span>
+          <i class="fa-solid fa-chevron-down text-xs text-zinc-300"></i>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button
+            id="btnToggleMusic"
+            class="w-9 h-9 rounded-full bg-[#1c1c1e]/95 flex items-center justify-center text-yellow-400 hover:bg-zinc-800 active:scale-90 transition"
+            title="Bật/Tắt nhạc"
+          >
+            <i id="musicIcon" class="fa-solid fa-music text-xs"></i>
+          </button>
+          <button
+            id="btnProfileAvatar"
+            class="w-10 h-10 rounded-full p-[2px] border-2 border-zinc-600/80 overflow-hidden active:scale-90 transition shadow-lg"
+            title="Mở Bánh sinh nhật 3D"
+          >
+            <img id="headerAvatarImg" src="" alt="Avatar" class="w-full h-full object-cover rounded-full" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Lưới ảnh 3 cột cuộn mượt -->
+      <div id="photoGridContainer" class="flex-1 overflow-y-auto no-scrollbar px-1.5 pb-28 grid grid-cols-3 gap-1.5 content-start"></div>
+
+      <!-- Thanh Dock nổi dưới cùng -->
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-[76%] max-w-[290px] h-[66px] rounded-[35px] bg-[#1c1c1e]/90 backdrop-blur-xl border border-white/5 flex items-center justify-around px-5 z-20 shadow-2xl">
+        <button
+          id="btnOpenCalendar"
+          class="w-11 h-11 rounded-full flex items-center justify-center text-zinc-400 hover:text-white text-xl active:scale-90 transition"
+          title="Kỷ niệm"
+        >
+          <i class="fa-solid fa-calendar-days"></i>
+        </button>
+
+        <button
+          id="btnCenterLocket"
+          class="locket-rainbow-ring w-[52px] h-[52px] shadow-[0_0_18px_rgba(232,121,249,0.35)] active:scale-90 transition"
+          title="Mở Bánh sinh nhật 3D"
+        >
+          <div class="w-full h-full bg-black rounded-full p-[3px] flex items-center justify-center">
+            <div class="w-full h-full bg-white rounded-full"></div>
+          </div>
+        </button>
+
+        <button
+          id="btnOpenChatList"
+          class="relative w-11 h-11 rounded-full flex items-center justify-center text-zinc-400 hover:text-white text-xl active:scale-90 transition"
+          title="Trò chuyện"
+        >
+          <i class="fa-solid fa-comment"></i>
+          <span class="absolute top-1 right-0 bg-[#eab308] text-black text-[10px] font-extrabold px-1.5 py-0.2 rounded-full border border-black leading-tight">
+            5+
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. MÀN HÌNH XEM ẢNH ĐƠN CHI TIẾT -->
+    <div id="screenPhotoViewer" class="screen-layer bg-black flex flex-col justify-between py-3.5 px-3.5">
+      <div id="floatingParticlesLayer" class="absolute inset-0 overflow-hidden pointer-events-none z-50"></div>
+
+      <div class="flex items-center justify-between px-1 pt-0.5 z-20">
+        <button
+          id="btnViewerOpenRollcall"
+          class="relative w-10 h-10 rounded-full bg-[#1c1c1e] flex items-center justify-center text-white hover:bg-zinc-800 active:scale-90 transition"
+        >
+          <i class="fa-solid fa-bullhorn text-sm -rotate-12"></i>
+          <span class="absolute -top-1.5 -right-2 bg-[#e598eb] text-black text-[9px] font-extrabold px-1.5 py-0.5 rounded-full border border-black leading-none">
+            MỚI
+          </span>
+        </button>
+
+        <button
+          id="btnViewerPeopleFilter"
+          class="px-4 py-2 rounded-full bg-[#1c1c1e] hover:bg-zinc-800 active:scale-95 transition flex items-center gap-1.5 text-sm font-bold text-white"
+        >
+          <span>Tất cả bạn bè</span>
+          <i class="fa-solid fa-chevron-down text-xs text-zinc-300"></i>
+        </button>
+
+        <!-- Công tắc bật/tắt tự động chạy ảnh kèm mưa hộp quà -->
+        <button
+          id="btnAutoPlayToggle"
+          class="w-11 h-6 rounded-full bg-zinc-700 p-0.5 flex items-center transition-colors duration-300 focus:outline-none"
+          title="Tự động trình chiếu & mưa quà"
+        >
+          <div id="autoPlayKnob" class="w-5 h-5 rounded-full bg-zinc-300 shadow-md transform transition-transform duration-300"></div>
+        </button>
+      </div>
+
+      <div class="my-auto flex flex-col items-center w-full">
+        <div
+          id="viewerCardArea"
+          class="relative w-full aspect-square max-h-[370px] rounded-[38px] overflow-hidden bg-zinc-900 shadow-2xl cursor-pointer select-none"
+        >
+          <img id="viewerMainImage" src="" alt="Memory" class="w-full h-full object-cover transition-all duration-300" />
+          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
+            <div id="viewerCaptionPill" class="px-4 py-1.5 rounded-2xl bg-black/55 backdrop-blur-md text-white text-sm font-bold whitespace-nowrap shadow-lg">
+              So sweet! 💕
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-2 mt-3.5">
+          <img id="viewerAuthorAvatar" src="" alt="Author" class="w-6 h-6 rounded-full object-cover" />
+          <span id="viewerAuthorName" class="text-[15px] font-bold text-white">sáng nắng</span>
+          <span id="viewerPhotoTime" class="text-[15px] font-semibold text-zinc-500">8m</span>
+        </div>
+
+        <div id="viewerDotsContainer" class="flex items-center justify-center gap-1.5 mt-2.5 px-4 flex-wrap"></div>
+      </div>
+
+      <div class="flex flex-col gap-3 pb-1 z-20">
+        <div class="flex items-center bg-[#1c1c1e] rounded-full px-4 py-2.5 gap-2 border border-white/5">
+          <input
+            id="viewerQuickInput"
+            type="text"
+            autocomplete="off"
+            placeholder="Gửi tin nhắn..."
+            class="bg-transparent text-white text-sm flex-1 focus:outline-none placeholder-zinc-400"
+          />
+          <div class="flex items-center gap-2.5 text-xl">
+            <button type="button" class="viewer-react-btn hover:scale-125 active:scale-90 transition" data-emoji="💛">💛</button>
+            <button type="button" class="viewer-react-btn hover:scale-125 active:scale-90 transition" data-emoji="🤣">🤣</button>
+            <button type="button" class="viewer-react-btn hover:scale-125 active:scale-90 transition" data-emoji="😀">😀</button>
+            <button type="button" id="btnSendPaperPlane" class="text-zinc-300 hover:text-white active:scale-90 transition ml-0.5">
+              <i class="fa-regular fa-face-smile-plus text-lg"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between px-1">
+          <button
+            id="btnCloseViewer"
+            class="w-[52px] h-[52px] rounded-full bg-[#1c1c1e] hover:bg-zinc-800 flex items-center justify-center text-white text-xl active:scale-90 transition"
+            title="Về lưới ảnh"
+          >
+            <i class="fa-solid fa-border-all"></i>
+          </button>
+
+          <div class="flex-1 mx-2.5 h-[56px] rounded-full bg-[#1c1c1e] flex items-center justify-around px-4">
+            <button id="btnViewerOpenCalendar" class="w-10 h-10 rounded-full flex items-center justify-center text-zinc-400 hover:text-white text-lg active:scale-90 transition">
+              <i class="fa-solid fa-calendar-days"></i>
+            </button>
+            <button id="btnViewerOpenCake" class="locket-rainbow-ring w-[44px] h-[44px] active:scale-90 transition">
+              <div class="w-full h-full bg-black rounded-full p-[2.5px] flex items-center justify-center">
+                <div class="w-full h-full bg-white rounded-full"></div>
+              </div>
+            </button>
+            <button id="btnViewerOpenChat" class="w-10 h-10 rounded-full flex items-center justify-center text-zinc-400 hover:text-white text-lg active:scale-90 transition">
+              <i class="fa-solid fa-comment"></i>
+            </button>
+          </div>
+
+          <button
+            id="btnDownloadPhoto"
+            class="w-[52px] h-[52px] rounded-full bg-[#1c1c1e] hover:bg-zinc-800 flex items-center justify-center text-white text-lg active:scale-90 transition"
+            title="Thả mưa tim & quà"
+          >
+            <i class="fa-solid fa-share-nodes"></i>
+          </button>
+          <button id="btnNextThumb" class="hidden"><img id="viewerNextThumbImg" src="" alt="" /></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3B. MÀN HÌNH ROLLCALL (LƯỚT DỌC BÀI ĐĂNG & VUỐT NGANG NHIỀU ẢNH TRONG MỖI BÀI GIỐNG HỆT VIDEO) -->
+    <div id="screenRollcall" class="screen-layer bg-black flex flex-col justify-between">
+      <div class="flex items-center justify-between px-4 pt-3.5 pb-2.5 bg-black/95 border-b border-white/5 z-20">
+        <button id="btnCloseRollcall" class="w-10 h-10 rounded-full flex items-center justify-center text-white text-2xl hover:bg-zinc-900 active:scale-90 transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="text-center">
+          <div class="flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-bullhorn text-white text-base -rotate-12"></i>
+            <span class="text-lg font-extrabold text-white tracking-tight">Rollcall</span>
+          </div>
+          <p class="text-xs font-semibold text-zinc-400 mt-0.5">
+            26 thg 10 <i class="fa-solid fa-arrow-right text-[10px] mx-0.5"></i> 1 thg 11, 2026
+          </p>
+        </div>
+
+        <div class="relative w-11 h-11 flex items-center justify-center">
+          <div class="w-8 h-10 rounded-md bg-zinc-800 border border-white/20 rotate-6 overflow-hidden">
+            <img id="rollcallCornerThumb" src="" alt="" class="w-full h-full object-cover opacity-70" />
+          </div>
+          <img id="rollcallCornerAvatar" src="" alt="" class="absolute -bottom-0.5 -right-0.5 w-6 h-6 rounded-full object-cover border-2 border-black" />
+        </div>
+      </div>
+
+      <!-- Danh sách bài đăng Rollcall của bạn bè -->
+      <div id="rollcallFeedContainer" class="flex-1 overflow-y-auto no-scrollbar pb-12 pt-2 space-y-6"></div>
+    </div>
+
+    <!-- 4. MODAL LỊCH KỶ NIỆM (THÁNG 11, 10, 9, 8 NĂM 2026 - SINH NHẬT 04/11/2026) -->
+    <div id="screenCalendar" class="modal-layer bg-black/75 backdrop-blur-md items-center justify-center p-4">
+      <div class="w-full max-w-[375px] max-h-[82dvh] bg-[#1c1c1e] rounded-[30px] border border-white/10 shadow-2xl flex flex-col overflow-hidden">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-white/5">
+          <h2 class="text-lg font-bold text-white">Kỷ niệm</h2>
+          <button id="btnCloseCalendar" class="w-8 h-8 rounded-full bg-zinc-800/80 flex items-center justify-center text-zinc-400 hover:text-white active:scale-90 transition">
+            <i class="fa-solid fa-xmark text-base"></i>
+          </button>
+        </div>
+
+        <div id="calendarMonthsScroll" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-6">
+          <div>
+            <h3 class="text-sm font-bold text-zinc-200 mb-3">Tháng 11 2026</h3>
+            <div id="calendarNovGrid" class="grid grid-cols-7 gap-1.5"></div>
+            <p class="text-[11px] text-yellow-400/90 mt-2.5 text-center">
+              ✨ Chạm vào ngày <span class="font-bold underline">4</span> tháng 11 để mở Bánh kem sinh nhật 3D!
+            </p>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-zinc-200 mb-3">Tháng 10 2026</h3>
+            <div id="calendarOctGrid" class="grid grid-cols-7 gap-1.5"></div>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-zinc-200 mb-3">Tháng 9 2026</h3>
+            <div id="calendarSepGrid" class="grid grid-cols-7 gap-1.5"></div>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-zinc-200 mb-3">Tháng 8 2026</h3>
+            <div id="calendarAugGrid" class="grid grid-cols-7 gap-1.5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5A. MÀN HÌNH DANH SÁCH TRÒ CHUYỆN -->
+    <div id="screenChatList" class="screen-layer bg-black flex flex-col justify-between">
+      <div class="flex items-center justify-between px-5 pt-4 pb-3 bg-black/90 backdrop-blur-md z-20">
+        <div class="w-9"></div>
+        <h2 class="text-lg font-bold text-white tracking-tight">Trò chuyện</h2>
+        <img id="chatTopAvatar" src="" alt="Avatar" class="w-9 h-9 rounded-full object-cover border border-zinc-700" />
+      </div>
+
+      <!-- Thông báo nổi khi bấm vào đoạn chat bị khóa -->
+      <div
+        id="lockedChatToast"
+        class="pointer-events-none fixed top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-full bg-zinc-900/95 border border-yellow-400/40 text-yellow-300 text-xs font-semibold shadow-2xl opacity-0 transition-opacity duration-200 whitespace-nowrap flex items-center gap-2"
+      >
+        <i class="fa-solid fa-lock text-yellow-400"></i>
+        <span>Đã khóa! Chỉ mở được chat với Người luôn yêu em 💛</span>
+      </div>
+
+      <div class="flex-1 overflow-y-auto no-scrollbar px-3 pb-28 space-y-1">
+        <button
+          id="btnOpenConversation"
+          class="w-full p-2.5 rounded-2xl bg-zinc-900/60 hover:bg-zinc-900 active:bg-zinc-800 transition flex items-center justify-between text-left border border-yellow-400/20"
+        >
+          <div class="flex items-center gap-3.5 min-w-0">
+            <div class="relative flex-shrink-0">
+              <img id="chatListSenderAvatar" src="" alt="Sender" class="w-[54px] h-[54px] rounded-full object-cover border-2 border-yellow-400 p-[1.5px]" />
+              <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-black rounded-full"></span>
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <p id="chatSenderNameList" class="font-bold text-white text-[16px] truncate">Người luôn yêu em</p>
+                <span class="text-[10px] bg-yellow-400/20 text-yellow-300 px-1.5 py-0.5 rounded-full font-bold">🎂 Đặc biệt</span>
+              </div>
+              <p id="chatPreviewText" class="text-zinc-300 text-sm truncate mt-0.5 font-medium">Happy Birthday người anh thương...</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 text-yellow-400 text-xs font-semibold flex-shrink-0 ml-2">
+            <span>vừa xong</span>
+            <i class="fa-solid fa-chevron-right text-[10px] ml-0.5"></i>
+          </div>
+        </button>
+
+        <div id="extraFriendsChatList" class="space-y-0.5 pt-1"></div>
+      </div>
+
+      <div class="absolute bottom-4 left-4 right-4 flex items-center justify-center gap-3 z-20">
+        <div class="flex-1 max-w-[260px] h-[62px] rounded-full bg-[#1c1c1e]/95 backdrop-blur-xl border border-white/5 flex items-center justify-around px-3 shadow-2xl">
+          <button id="btnChatDockCalendar" class="w-11 h-11 rounded-full flex items-center justify-center text-zinc-400 hover:text-white text-lg active:scale-90 transition">
+            <i class="fa-solid fa-calendar-days"></i>
+          </button>
+          <button id="btnCloseChatList" class="w-11 h-11 rounded-full flex items-center justify-center text-zinc-400 hover:text-white text-lg active:scale-90 transition">
+            <i class="fa-solid fa-house"></i>
+          </button>
+          <button class="w-14 h-10 rounded-full bg-zinc-700/70 flex items-center justify-center text-white text-lg">
+            <i class="fa-solid fa-comment"></i>
+          </button>
+        </div>
+
+        <button id="btnNewChatCompose" class="w-[60px] h-[60px] rounded-full bg-[#e396f8] hover:bg-[#d87ef2] text-black flex items-center justify-center text-xl shadow-xl active:scale-90 transition">
+          <i class="fa-solid fa-pen"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- 5B. MÀN HÌNH PHÒNG CHAT AI (GIỮ NGUYÊN LỊCH SỬ KHI THOÁT) -->
+    <div id="screenChatRoom" class="screen-layer bg-[#0d0d0d] flex flex-col justify-between">
+      <div class="flex items-center justify-between px-3.5 py-3 border-b border-white/5 bg-[#121214] z-20">
+        <div class="flex items-center gap-3">
+          <button id="btnBackToChatList" class="w-9 h-9 rounded-full flex items-center justify-center text-white text-base hover:bg-white/10 active:scale-90 transition">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="relative">
+            <img id="chatRoomAvatar" src="" alt="Avatar" class="w-8 h-8 rounded-full object-cover" />
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border border-[#121214] rounded-full"></span>
+          </div>
+          <div class="flex flex-col">
+            <span id="chatSenderNameRoom" class="text-white font-semibold text-sm leading-tight">Người luôn yêu em</span>
+            <span id="chatAiStatusText" class="text-[10px] text-green-400 font-medium">Đang hoạt động</span>
+          </div>
+        </div>
+
+        <button id="btnResetChatHistory" class="w-8 h-8 rounded-full flex items-center justify-center text-zinc-500 hover:text-zinc-200 hover:bg-white/10 active:scale-90 transition" title="Phát lại tin nhắn mở đầu">
+          <i class="fa-solid fa-rotate-right text-xs"></i>
+        </button>
+      </div>
+
+      <div id="chatMessagesContainer" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-2.5 flex flex-col justify-start"></div>
+
+      <div class="p-3 bg-[#0d0d0d] z-20">
+        <div class="flex items-center bg-[#262626] rounded-full px-4 py-2 gap-2 border border-white/5 focus-within:border-yellow-400/50 transition">
+          <input
+            id="chatInputBox"
+            type="text"
+            autocomplete="off"
+            placeholder="Gửi tin nhắn..."
+            class="bg-transparent text-white text-sm flex-1 focus:outline-none placeholder-zinc-400"
+          />
+          <div class="flex items-center gap-2 text-lg">
+            <button type="button" class="emoji-react-btn hover:scale-125 active:scale-95 transition" data-emoji="🤣">🤣</button>
+            <button type="button" class="emoji-react-btn hover:scale-125 active:scale-95 transition" data-emoji="💛">💛</button>
+            <button type="button" class="emoji-react-btn hover:scale-125 active:scale-95 transition" data-emoji="🔥">🔥</button>
+            <button type="button" id="btnSendUserMsg" class="text-zinc-300 hover:text-yellow-400 active:scale-90 transition ml-1">
+              <i id="sendBtnIcon" class="fa-regular fa-face-smile"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. MÀN HÌNH BÁNH KEM SINH NHẬT 3D & PHÁO HOA -->
+    <div id="screenCake3D" class="screen-layer bg-[#040711] flex flex-col justify-between">
+      <canvas id="fireworksCanvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+
+      <div class="relative z-20 flex justify-end p-4">
+        <button id="btnCloseCake3D" class="w-10 h-10 rounded-full bg-zinc-800/80 border border-white/15 flex items-center justify-center text-white text-lg hover:bg-zinc-700 active:scale-90 transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="cake-scene relative z-10 flex-1 cursor-grab active:cursor-grabbing" id="cakeTouchArea">
+        <div class="cake-3d-wrapper" id="cake3DObject">
+          <div class="candle-3d">
+            <div class="candle-flame"></div>
+          </div>
+          <div id="cakeTopTier" class="cake-tier" style="top: 36px;"></div>
+          <div id="cakeBottomTier" class="cake-tier" style="top: 146px;"></div>
+        </div>
+      </div>
+
+      <div class="relative z-20 pb-6 text-center px-4">
+        <p id="cakeWishFooter" class="text-sm font-semibold text-yellow-300 drop-shadow">🎂 Chúc mừng sinh nhật em yêu 04/11 💛</p>
+        <p class="text-[11px] text-zinc-400 mt-0.5">Vuốt ngang để xoay bánh 3D • Chạm vào màn hình để bắn pháo hoa</p>
+      </div>
+    </div>
+
+    <!-- MODAL DANH SÁCH BẠN BÈ CHUẨN LOCKET (KHI BẤM "TẤT CẢ BẠN BÈ ⌄") -->
+    <div id="modalCustomPhotos" class="modal-layer bg-black/75 backdrop-blur-md items-start justify-center pt-16 px-4">
+      <div class="w-full max-w-[355px] max-h-[74dvh] bg-[#1c1c1e] border border-white/10 rounded-[28px] overflow-hidden shadow-2xl flex flex-col">
+        <div class="flex items-center justify-between px-5 py-3.5 border-b border-white/5">
+          <span class="text-sm font-bold text-zinc-300">Bạn bè trên Locket</span>
+          <button id="btnCloseCustomModal" class="w-7 h-7 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white active:scale-90 transition">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
+        <div id="friendsFilterListContainer" class="flex-1 overflow-y-auto no-scrollbar p-2 space-y-1"></div>
+      </div>
+    </div>
+
+    <audio id="bgMusicAudio" loop preload="auto"></audio>
+  </div>
+
+  <script id="appCoreScript">
+    // ============================================================================
+    // FILE CẤU HÌNH TRUNG TÂM (TẤT CẢ NHẠC, ẢNH, CHỮ HIỂN THỊ ĐỀU NẰM Ở ĐÂY)
+    // ============================================================================
+    const CONFIG = {
+      // 1. ÂM THANH NHẠC NỀN (Điền đường dẫn file nhạc .mp3, ví dụ: "music/nhac.mp3")
+      musicUrl: "/music/nhac.mp3",
+
+      // 2. CHỮ HIỂN THỊ TRÊN GIAO DIỆN & TÊN NGƯỜI GỬI
+      senderName: "Người luôn yêu em",
+      chatPreview: "Happy Birthday người anh thương...",
+      cakeFooterText: "🎂 Chúc mừng sinh nhật em yêu 04/11 💛",
+      photoFeedAuthorName: "Yến Nhi",
+      rollcallDateText: "26 thg 10 → 1 thg 11, 2026",
+      lockedChatToastText: "Đã khóa! Chỉ mở được chat với Người luôn yêu em 💛",
+      birthdayDayNov: 4, // Ngày sinh nhật trong Tháng 11/2026
+      defaultStackedGrid: false,
+
+      // 3. TIN NHẮN CHÚC MỪNG SINH NHẬT TỰ ĐỘNG CHẠY KHI MỞ PHÒNG CHAT
+      chatMessages: [
+        "⚠️ TIN KHẨN ⚠️",
+        "Vào 04/11, một em bé siêu đáng yêu đột ngột bước sang tuổi mới 🤪💞",
+        "Và em bé đó hiện đang là ở đây 🥰",
+        "Chúc mừng sinh nhật em nhaaaa 🎂"
+      ],
+
+      // 4. CÂU TRẢ LỜI TỰ ĐỘNG CỦA AI THEO TỪ KHÓA & NGẪU NHIÊN
+      aiKeywordReplies: [
+        {
+          keywords: ["cảm ơn", "cam on", "thank", "iu"],
+          reply: "Không có gì đâu em bé ơi 🥰 Chỉ cần nhìn thấy em cười hạnh phúc trong ngày sinh nhật là anh vui cả ngày rồi 💛"
+        },
+        {
+          keywords: ["dạ", "da", "vâng", "uki", "ok"],
+          reply: "Ngoan quá trời luôn 🥰 Hôm nay sinh nhật em bé nên em ước gì anh cũng chiều hết nha 🎂💞"
+        },
+        {
+          keywords: ["hi", "hello", "chào", "ê", "alo"],
+          reply: "Chào công chúa xinh đẹp nhất hôm nay nha 👋😚 Em đã xem hết ảnh kỷ niệm với bánh kem 3D anh chuẩn bị chưa nè? 🎂💛"
+        },
+        {
+          keywords: ["yêu", "thương", "nhớ"],
+          reply: "Anh cũng yêu và thương em bé nhiều lắm luôn á 😚💞 Chúc cục cưng tuổi mới ngày càng xinh đẹp và hạnh phúc bên anh nha!"
+        },
+        {
+          keywords: ["quà", "bánh", "đẹp", "xinh"],
+          reply: "Món quà nhỏ anh tự tay chuẩn bị tặng em đó 🎁 Em bấm vào ngày 04/11 trong Lịch kỷ niệm hoặc nút tròn giữa màn hình để xoay bánh kem 3D nha 🎂✨"
+        },
+        {
+          keywords: ["ăn", "đói", "đi chơi", "trà sữa"],
+          reply: "Lên đồ xinh đẹp đi công chúa ơi, hôm nay sinh nhật em nên muốn ăn gì anh dẫn đi ăn sập quán luôn 🍰🍓🥂"
+        }
+      ],
+      aiFallbackReplies: [
+        "Tuổi mới chúc em bé của anh luôn xinh đẹp, rạng rỡ và lúc nào cũng cười tươi nhá 🎂💞",
+        "Mọi ước nguyện tuổi mới của em bé đều sẽ thành hiện thực hết nha 🥰💛",
+        "Nghe em nhắn thôi là thấy đáng yêu xỉu rồi 😚 Hôm nay công chúa là nhân vật chính nên muốn gì anh cũng chiều hết! 👑💖",
+        "Chúc mừng sinh nhật đứa em gái anh thương nhất 🎂 Mong mỗi ngày trôi qua của em đều ngập tràn tiếng cười như hôm nay nha 🌸✨"
+      ],
+
+     // 5. DANH SÁCH ẢNH KỶ NIỆM & CHỮ CAPTION TRÊN TỪNG ẢNH
+      // (Khi tải về máy, bạn có thể đổi url thành "images/1.jpg", "images/2.jpg",...)
+      photos: [
+        { url: "images/1.jpg", caption: "So sweet! 💕" },
+        { url: "images/2.jpg", caption: "Always together 💞" },
+        { url: "images/3.jpg", caption: "Love you! 💓" },
+        { url: "images/4.jpg", caption: "Life is good 🌈" },
+        { url: "images/5.jpg", caption: "Look at this!" },
+        { url: "images/6.jpg", caption: "Always together 🫐" },
+        { url: "images/7.jpg", caption: "My favorite person ✨" },
+        { url: "images/8.jpg", caption: "Cutie pie 🥰" },
+        { url: "images/9.jpg", caption: "Sweetest smile 😊" },
+        { url: "images/10.jpg", caption: "Forever & Always 💖" },
+        { url: "images/11.jpg", caption: "Best memories 🌸" },
+        { url: "images/12.jpg", caption: "Happy Birthday 🎂" },
+        { url: "images/13.jpg", caption: "You & Me 💑" },
+        { url: "images/14.jpg", caption: "Shining star ⭐" },
+        { url: "images/15.jpg", caption: "My sunshine ☀️" },
+        { url: "images/16.jpg", caption: "Beautiful moments 📸" },
+        { url: "images/17.jpg", caption: "Just you and me 🌙" },
+        { url: "images/18.jpg", caption: "Perfect day 🌷" },
+        { url: "images/19.jpg", caption: "Making memories 🎞️" },
+        { url: "images/20.jpg", caption: "Always smiling 😁" },
+        { url: "images/21.jpg", caption: "My everything 🌍" },
+        { url: "images/22.jpg", caption: "Endless love ❤️" },
+        { url: "images/23.jpg", caption: "So happy together 🥰" },
+        { url: "images/24.jpg", caption: "Love this vibe ✨" }
+      ],
+
+      // 6. DANH SÁCH BÀI ĐĂNG ROLLCALL (Mỗi người có nhiều ảnh để vuốt ngang)
+      rollcallPosts: [
+        {
+          author: "Cục nợ 🎀",
+          day: "Thứ Hai",
+          avatarIndex: 0,
+          photos: [0, 1, 2, 3, 4],
+          sticker: "✨"
+        },
+        {
+          author: "em ghệ",
+          day: "Chủ Nhật",
+          avatarIndex: 2,
+          photos: [5, 6],
+          sticker: "😍"
+        },
+        {
+          author: "Vợ",
+          day: "Thứ Bảy",
+          avatarIndex: 4,
+          photos: [7, 8, 9],
+          sticker: "🤣"
+        },
+        {
+          author: "Bé xinh",
+          day: "Thứ Ba",
+          avatarIndex: 6,
+          photos: [10, 11, 12, 13],
+          sticker: "💛"
+        }
+      ],
+
+      // 7. DANH SÁCH BẠN BÈ BÊN DƯỚI PHẦN TRÒ CHUYỆN (Đã khóa, chỉ làm cảnh)
+      friendsChatList: [
+        { name: "Cục nợ 🎀", msg: "loại loại", time: "20h", avatarIdx: 0 },
+        { name: "Hết money 🍤", msg: "Hết money đã bày tỏ cảm xúc 💛...", time: "1d", avatarIdx: 1 },
+        { name: "Bunnie 🐰 🐰", msg: "giàu:))", time: "2d", avatarIdx: 2 },
+        { name: "Đen thôi đỏ quên đi", msg: "ko", time: "4d", avatarIdx: 3 },
+        { name: "Em ghệ", msg: "Em đói", time: "5d", avatarIdx: 4 },
+        { name: "Thảo em", msg: "xin mín", time: "5d", avatarIdx: 5 },
+        { name: "Sherry 🐰", msg: "em mượn acc", time: "6d", avatarIdx: 6 }
+      ]
+    };
+
+    // ============================================================================
+    // LOGIC XỬ LÝ GIAO DIỆN & HIỆU ỨNG
+    // ============================================================================
+    let currentPhotoIndex = 0;
+    let isAutoPlaying = false;
+    let autoPlayTimer = null;
+    let giftRainTimer = null;
+    let activeScreenId = "screenIntro";
+    let selectedFriendFilter = "Tất cả bạn bè";
+
+    // Trạng thái hội thoại AI (Giữ nguyên lịch sử khi thoát ra vào lại)
+    const CHAT_STORAGE_KEY = "locket_birthday_0411_chat_v3";
+    let chatHistory = [];
+    let introChatFinished = false;
+    let introTypingTimeouts = [];
+    let isAiReplying = false;
+    let fallbackReplyIndex = 0;
+
+    // Trạng thái âm thanh
+    let audioCtx = null;
+    let isMusicPlaying = false;
+    let melodyTimer = null;
+
+    // Chuyển đổi giữa các màn hình chính (Đảm bảo không bao giờ bị đen màn hình)
+    function showScreen(targetId) {
+      const screens = document.querySelectorAll(".screen-layer");
+      let found = false;
+      screens.forEach((sc) => {
+        if (sc.id === targetId) {
+          sc.classList.add("screen-active");
+          found = true;
+        } else {
+          sc.classList.remove("screen-active");
+        }
+      });
+
+      if (!found) {
+        const mainGrid = document.getElementById("screenMainGrid");
+        if (mainGrid) mainGrid.classList.add("screen-active");
+        activeScreenId = "screenMainGrid";
+      } else {
+        activeScreenId = targetId;
+      }
+
+      if (targetId !== "screenPhotoViewer" && isAutoPlaying) {
+        stopAutoPlaySlideshow();
+      }
+      if (targetId === "screenCake3D") {
+        startCake3DAnimation();
+      } else {
+        stopCake3DAnimation();
+      }
+    }
+
+    function openModal(modalId) {
+      const m = document.getElementById(modalId);
+      if (m) m.classList.add("modal-active");
+    }
+
+    function closeModal(modalId) {
+      const m = document.getElementById(modalId);
+      if (m) m.classList.remove("modal-active");
+    }
+
+    // Khởi tạo dữ liệu hiển thị
+    function initAppUI() {
+      const firstPhoto = CONFIG.photos[0]?.url || "";
+      const senderPhoto = CONFIG.photos[11]?.url || firstPhoto;
+
+      document.getElementById("headerAvatarImg").src = firstPhoto;
+      document.getElementById("chatTopAvatar").src = firstPhoto;
+      document.getElementById("chatListSenderAvatar").src = senderPhoto;
+      document.getElementById("chatRoomAvatar").src = senderPhoto;
+      document.getElementById("viewerAuthorAvatar").src = firstPhoto;
+
+      document.getElementById("chatSenderNameList").textContent = CONFIG.senderName;
+      document.getElementById("chatSenderNameRoom").textContent = CONFIG.senderName;
+      document.getElementById("cakeWishFooter").textContent = CONFIG.cakeFooterText;
+      document.getElementById("viewerAuthorName").textContent = CONFIG.photoFeedAuthorName;
+
+      if (CONFIG.musicUrl) {
+        document.getElementById("bgMusicAudio").src = CONFIG.musicUrl;
+      }
+
+      loadSavedChatState();
+      updateChatListPreview();
+      renderMainPhotoGrid();
+      renderFriendsFilterModal();
+      renderExtraFriendsChatList();
+      renderRollcallFeed();
+      renderAllCalendarMonths();
+      build3DCakeTiers();
+    }
+
+    // 1. Lưới ảnh chính 3 cột
+    function renderMainPhotoGrid() {
+      const container = document.getElementById("photoGridContainer");
+      container.innerHTML = "";
+      if (CONFIG.defaultStackedGrid) {
+        container.classList.add("grid-stacked-mode");
+      } else {
+        container.classList.remove("grid-stacked-mode");
+      }
+
+      // Lặp danh sách ảnh để lưới đầy đặn đẹp mắt
+      const totalItems = Math.max(CONFIG.photos.length, 18);
+      for (let i = 0; i < totalItems; i++) {
+        const realIdx = i % CONFIG.photos.length;
+        const item = CONFIG.photos[realIdx];
+        const card = document.createElement("div");
+        card.className = "relative aspect-square rounded-[20px] overflow-hidden bg-zinc-900 cursor-pointer group active:scale-95 transition-transform duration-150";
+        card.innerHTML = `
+          <img src="${item.url}" alt="Photo ${i + 1}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        `;
+        card.addEventListener("click", () => {
+          openPhotoViewer(realIdx);
+        });
+        container.appendChild(card);
+      }
+    }
+
+    // 2. Modal Danh sách bạn bè khi bấm "Tất cả bạn bè ⌄"
+    function renderFriendsFilterModal() {
+      const listEl = document.getElementById("friendsFilterListContainer");
+      if (!listEl) return;
+
+      const filterOptions = [
+        { name: "Tất cả bạn bè", subtitle: `${CONFIG.photos.length} ảnh kỷ niệm`, avatar: CONFIG.photos[0]?.url, isAll: true },
+        { name: CONFIG.senderName, subtitle: "🎂 Người đặc biệt nhất", avatar: CONFIG.photos[11]?.url || CONFIG.photos[0]?.url },
+        { name: CONFIG.photoFeedAuthorName, subtitle: "Bạn thân", avatar: CONFIG.photos[1]?.url || CONFIG.photos[0]?.url },
+        ...CONFIG.friendsChatList.map((f) => ({
+          name: f.name,
+          subtitle: "Bạn bè trên Locket",
+          avatar: CONFIG.photos[f.avatarIdx % CONFIG.photos.length]?.url
+        }))
+      ];
+
+      listEl.innerHTML = "";
+      filterOptions.forEach((opt) => {
+        const isSelected = selectedFriendFilter === opt.name;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `w-full px-3.5 py-2.5 rounded-2xl flex items-center justify-between transition text-left ${
+          isSelected ? "bg-yellow-400/15 border border-yellow-400/40" : "hover:bg-zinc-800/70"
+        }`;
+        btn.innerHTML = `
+          <div class="flex items-center gap-3 min-w-0">
+            <img src="${opt.avatar}" alt="${opt.name}" class="w-10 h-10 rounded-full object-cover border border-white/15 flex-shrink-0" />
+            <div class="min-w-0">
+              <p class="text-sm font-bold text-white truncate">${opt.name}</p>
+              <p class="text-xs text-zinc-400 truncate">${opt.subtitle}</p>
+            </div>
+          </div>
+          <div class="w-6 h-6 rounded-full flex items-center justify-center ${
+            isSelected ? "bg-yellow-400 text-black" : "border border-zinc-600 text-transparent"
+          }">
+            <i class="fa-solid fa-check text-xs"></i>
+          </div>
+        `;
+        btn.addEventListener("click", () => {
+          selectedFriendFilter = opt.name;
+          document.getElementById("filterButtonLabel").textContent = opt.name;
+          renderFriendsFilterModal();
+          renderMainPhotoGrid();
+          closeModal("modalCustomPhotos");
+        });
+        listEl.appendChild(btn);
+      });
+    }
+
+    // 3. Xem ảnh đơn chi tiết & Tự động phát kèm mưa quà
+    function openPhotoViewer(index) {
+      currentPhotoIndex = (index + CONFIG.photos.length) % CONFIG.photos.length;
+      updatePhotoViewerContent();
+      showScreen("screenPhotoViewer");
+    }
+
+    function updatePhotoViewerContent() {
+      const item = CONFIG.photos[currentPhotoIndex];
+      if (!item) return;
+
+      const mainImg = document.getElementById("viewerMainImage");
+      mainImg.style.opacity = "0.4";
+      setTimeout(() => {
+        mainImg.src = item.url;
+        mainImg.style.opacity = "1";
+      }, 60);
+
+      document.getElementById("viewerCaptionPill").textContent = item.caption || "So sweet! 💕";
+      document.getElementById("viewerAuthorAvatar").src = item.url;
+      const times = ["vừa xong", "3m", "8m", "15m", "1h", "2h", "4h"];
+      document.getElementById("viewerPhotoTime").textContent = times[currentPhotoIndex % times.length];
+
+      // Render dấu chấm phân trang
+      const dotsContainer = document.getElementById("viewerDotsContainer");
+      dotsContainer.innerHTML = "";
+      CONFIG.photos.forEach((_, idx) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = idx === currentPhotoIndex
+          ? "w-2 h-2 rounded-full bg-white scale-125 transition-all"
+          : "w-1.5 h-1.5 rounded-full bg-zinc-600 hover:bg-zinc-400 transition-all";
+        dot.addEventListener("click", (e) => {
+          e.stopPropagation();
+          currentPhotoIndex = idx;
+          updatePhotoViewerContent();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function nextPhoto() {
+      currentPhotoIndex = (currentPhotoIndex + 1) % CONFIG.photos.length;
+      updatePhotoViewerContent();
+    }
+
+    function prevPhoto() {
+      currentPhotoIndex = (currentPhotoIndex - 1 + CONFIG.photos.length) % CONFIG.photos.length;
+      updatePhotoViewerContent();
+    }
+
+    function spawnFloatingGiftOrHeart(customEmoji) {
+      const layer = document.getElementById("floatingParticlesLayer");
+      if (!layer) return;
+      const emojis = customEmoji ? [customEmoji] : ["🎁", "💖", "💝", "💕", "🎂", "✨", "💛"];
+      const particle = document.createElement("div");
+      particle.className = "floating-particle text-3xl select-none";
+      particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      particle.style.left = `${10 + Math.random() * 78}%`;
+      particle.style.fontSize = `${24 + Math.floor(Math.random() * 16)}px`;
+      layer.appendChild(particle);
+      setTimeout(() => particle.remove(), 3600);
+    }
+
+    function burstGiftRain(count = 10, customEmoji = null) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => spawnFloatingGiftOrHeart(customEmoji), i * 140);
+      }
+    }
+
+    function startAutoPlaySlideshow() {
+      isAutoPlaying = true;
+      const btn = document.getElementById("btnAutoPlayToggle");
+      const knob = document.getElementById("autoPlayKnob");
+      btn.classList.remove("bg-zinc-700");
+      btn.classList.add("bg-yellow-400");
+      knob.classList.remove("bg-zinc-300");
+      knob.classList.add("bg-white", "translate-x-5");
+
+      burstGiftRain(8);
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      if (giftRainTimer) clearInterval(giftRainTimer);
+
+      autoPlayTimer = setInterval(() => {
+        nextPhoto();
+      }, 2100);
+
+      giftRainTimer = setInterval(() => {
+        spawnFloatingGiftOrHeart();
+      }, 320);
+    }
+
+    function stopAutoPlaySlideshow() {
+      isAutoPlaying = false;
+      const btn = document.getElementById("btnAutoPlayToggle");
+      const knob = document.getElementById("autoPlayKnob");
+      if (btn && knob) {
+        btn.classList.add("bg-zinc-700");
+        btn.classList.remove("bg-yellow-400");
+        knob.classList.add("bg-zinc-300");
+        knob.classList.remove("bg-white", "translate-x-5");
+      }
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      if (giftRainTimer) clearInterval(giftRainTimer);
+      autoPlayTimer = null;
+      giftRainTimer = null;
+    }
+
+    function toggleAutoPlaySlideshow() {
+      if (isAutoPlaying) {
+        stopAutoPlaySlideshow();
+      } else {
+        startAutoPlaySlideshow();
+      }
+    }
+
+    // 4. Màn hình Rollcall chuẩn Locket (Lướt dọc & Vuốt ngang từng ảnh)
+    function renderRollcallFeed() {
+      const feed = document.getElementById("rollcallFeedContainer");
+      if (!feed) return;
+      feed.innerHTML = "";
+
+      const firstUrl = CONFIG.photos[0]?.url || "";
+      document.getElementById("rollcallCornerThumb").src = firstUrl;
+      document.getElementById("rollcallCornerAvatar").src = firstUrl;
+
+      CONFIG.rollcallPosts.forEach((post) => {
+        const postAvatar = CONFIG.photos[post.avatarIndex % CONFIG.photos.length]?.url || firstUrl;
+        const postEl = document.createElement("div");
+        postEl.className = "flex flex-col space-y-2.5";
+
+        const slidesHtml = post.photos
+          .map((pIdx, sIdx) => {
+            const pUrl = CONFIG.photos[pIdx % CONFIG.photos.length]?.url || firstUrl;
+            return `
+              <div class="relative flex-shrink-0 w-[88%] aspect-[4/5] rounded-[28px] overflow-hidden bg-zinc-900 snap-center shadow-xl border border-white/5">
+                <img src="${pUrl}" alt="${post.author}" class="w-full h-full object-cover" />
+                <div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-black/55 backdrop-blur-md text-white text-xs font-extrabold">
+                  ${sIdx + 1} / ${post.photos.length}
+                </div>
+                ${
+                  sIdx === 0 && post.sticker
+                    ? `<div class="rollcall-sticker absolute bottom-3.5 left-3.5 text-4xl select-none">${post.sticker}</div>`
+                    : ""
+                }
+                <button
+                  type="button"
+                  class="rollcall-react-btn absolute bottom-3.5 right-3.5 w-11 h-11 rounded-full bg-black/55 backdrop-blur-md text-white hover:text-yellow-400 flex items-center justify-center text-lg active:scale-90 transition border border-white/10"
+                  title="Thả cảm xúc"
+                >
+                  <i class="fa-regular fa-face-smile-plus"></i>
+                </button>
+              </div>
+            `;
+          })
+          .join("");
+
+        postEl.innerHTML = `
+          <div class="flex gap-3 overflow-x-auto no-scrollbar px-4 snap-x snap-mandatory">
+            ${slidesHtml}
+          </div>
+          <div class="flex items-center justify-between px-5 pt-0.5">
+            <div class="flex items-center gap-2.5">
+              <img src="${postAvatar}" alt="${post.author}" class="w-9 h-9 rounded-full object-cover border border-white/15" />
+              <div>
+                <p class="text-sm font-bold text-white leading-tight">${post.author}</p>
+                <p class="text-xs text-zinc-400 font-medium">${post.day}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 text-zinc-400">
+              <button type="button" class="hover:text-white transition"><i class="fa-solid fa-ellipsis text-base"></i></button>
+              <button type="button" class="rollcall-chat-btn w-8 h-8 rounded-full bg-zinc-800/90 hover:bg-zinc-700 text-white flex items-center justify-center text-xs transition">
+                <i class="fa-regular fa-comment-dots"></i>
+              </button>
+            </div>
+          </div>
+        `;
+
+        postEl.querySelectorAll(".rollcall-react-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            btn.innerHTML = "💛";
+            btn.classList.add("scale-125");
+            setTimeout(() => btn.classList.remove("scale-125"), 250);
+          });
+        });
+
+        postEl.querySelectorAll(".rollcall-chat-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            openChatRoomScreen();
+          });
+        });
+
+        feed.appendChild(postEl);
+      });
+    }
+
+    // 5. Lịch Kỷ niệm Thời gian thực (Tháng 11, 10, 9, 8 năm 2026 - Giới hạn đến ngày hiện tại 03/11/2026)
+    function renderSingleMonthCalendar(containerId, year, month, daysInMonth, startOffset, photoDaysMap, highlightBirthdayDay = null) {
+      const grid = document.getElementById(containerId);
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      // Ngày hiện tại thời gian thực (03/11/2026)
+      const curDate = new Date(2026, 10, 3); // Tháng 11 là index 10
+
+      for (let i = 0; i < startOffset; i++) {
+        const emptyCell = document.createElement("div");
+        emptyCell.className = "aspect-square rounded-xl bg-zinc-800/35 flex items-center justify-center text-zinc-600 text-xs";
+        emptyCell.textContent = "•";
+        grid.appendChild(emptyCell);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const cell = document.createElement("div");
+        const cellDate = new Date(year, month, day);
+        const isFuture = cellDate > curDate; // Kiểm tra xem có phải ngày trong tương lai không
+        const isBirthday = highlightBirthdayDay === day;
+        const photoEntry = isFuture ? null : photoDaysMap[day]; // Tương lai tuyệt đối không có ảnh
+
+        if (isBirthday) {
+          const bdayPhoto = CONFIG.photos[11]?.url || CONFIG.photos[0]?.url;
+          cell.className = "relative aspect-square rounded-xl overflow-visible bg-zinc-800 border-2 border-yellow-400 shadow-[0_0_16px_rgba(250,204,21,0.75)] flex items-center justify-center cursor-pointer active:scale-90 transition animate-pulse";
+          cell.innerHTML = `
+            <img src="${bdayPhoto}" alt="Birthday" class="w-full h-full object-cover rounded-[10px] opacity-60" />
+            <span class="absolute inset-0 flex items-center justify-center text-xs font-extrabold text-white drop-shadow">${day}</span>
+            <span class="absolute -top-2 -left-1.5 text-sm drop-shadow">🎂</span>
+          `;
+          cell.addEventListener("click", () => {
+            closeModal("screenCalendar");
+            showScreen("screenCake3D");
+          });
+        } else if (photoEntry) {
+          const pUrl = CONFIG.photos[photoEntry.idx % CONFIG.photos.length]?.url;
+          cell.className = "relative aspect-square rounded-xl overflow-visible bg-zinc-800 cursor-pointer hover:scale-105 active:scale-95 transition";
+          cell.innerHTML = `
+            <img src="${pUrl}" alt="Day ${day}" class="w-full h-full object-cover rounded-xl" />
+            ${photoEntry.badge ? `<span class="absolute -top-1.5 -right-1 text-xs drop-shadow">${photoEntry.badge}</span>` : ""}
+          `;
+          cell.addEventListener("click", () => {
+            closeModal("screenCalendar");
+            openPhotoViewer(photoEntry.idx % CONFIG.photos.length);
+          });
+        } else {
+          cell.className = `aspect-square rounded-xl flex items-center justify-center text-xs font-semibold ${
+            isFuture ? "bg-zinc-900/40 text-zinc-600" : "bg-zinc-800/65 text-zinc-300"
+          }`;
+          cell.textContent = day;
+        }
+
+        grid.appendChild(cell);
+      }
+    }
+
+    function renderAllCalendarMonths() {
+      // Tháng 11/2026 (month index = 10, 30 ngày, 1/11 là Chủ Nhật -> offset 6)
+      renderSingleMonthCalendar(
+        "calendarNovGrid",
+        2026,
+        10,
+        30,
+        6,
+        {
+          1: { idx: 0, badge: "✨" },
+          2: { idx: 1 },
+          3: { idx: 2, badge: "💛" },
+          8: { idx: 3 },
+          12: { idx: 4, badge: "😍" },
+          15: { idx: 5 },
+          19: { idx: 6 },
+          22: { idx: 7, badge: "🌸" },
+          26: { idx: 8 },
+          29: { idx: 9 }
+        },
+        CONFIG.birthdayDayNov
+      );
+
+      // Tháng 10/2026 (month index = 9, 31 ngày, 1/10 là Thứ Năm -> offset 3)
+      renderSingleMonthCalendar("calendarOctGrid", 2026, 9, 31, 3, {
+        2: { idx: 10, badge: "✨" },
+        5: { idx: 11 },
+        9: { idx: 12, badge: "😍" },
+        14: { idx: 13 },
+        18: { idx: 14, badge: "💛" },
+        20: { idx: 0, badge: "💐" },
+        24: { idx: 1 },
+        27: { idx: 2 },
+        30: { idx: 3 }
+      });
+
+      // Tháng 9/2026 (month index = 8, 30 ngày, 1/9 là Thứ Ba -> offset 1)
+      renderSingleMonthCalendar("calendarSepGrid", 2026, 8, 30, 1, {
+        2: { idx: 4, badge: "✨" },
+        6: { idx: 5 },
+        11: { idx: 6, badge: "💛" },
+        16: { idx: 7 },
+        21: { idx: 8, badge: "😍" },
+        25: { idx: 9 },
+        28: { idx: 10 }
+      });
+
+      // Tháng 8/2026 (month index = 7, 31 ngày, 1/8 là Thứ Bảy -> offset 5)
+      renderSingleMonthCalendar("calendarAugGrid", 2026, 7, 31, 5, {
+        3: { idx: 11 },
+        8: { idx: 12, badge: "🌸" },
+        15: { idx: 13 },
+        22: { idx: 14, badge: "💛" },
+        29: { idx: 0 }
+      });
+    }
+
+    // 6. Danh sách Trò chuyện (Khóa toàn bộ bạn bè bên dưới, chỉ mở được Người luôn yêu em)
+    let lockedToastTimer = null;
+    function showLockedChatToast() {
+      const toast = document.getElementById("lockedChatToast");
+      if (!toast) return;
+      toast.querySelector("span").textContent = CONFIG.lockedChatToastText;
+      toast.classList.remove("opacity-0");
+      toast.classList.add("opacity-100");
+      if (lockedToastTimer) clearTimeout(lockedToastTimer);
+      lockedToastTimer = setTimeout(() => {
+        toast.classList.remove("opacity-100");
+        toast.classList.add("opacity-0");
+      }, 2200);
+    }
+
+    function renderExtraFriendsChatList() {
+      const container = document.getElementById("extraFriendsChatList");
+      if (!container) return;
+      container.innerHTML = "";
+
+      CONFIG.friendsChatList.forEach((friend) => {
+        const avatarUrl = CONFIG.photos[friend.avatarIdx % CONFIG.photos.length]?.url || CONFIG.photos[0]?.url;
+        const row = document.createElement("div");
+        row.className = "w-full p-2.5 rounded-2xl hover:bg-zinc-900/50 transition flex items-center justify-between text-left cursor-not-allowed opacity-80 select-none";
+        row.innerHTML = `
+          <div class="flex items-center gap-3.5 min-w-0">
+            <div class="relative flex-shrink-0">
+              <img src="${avatarUrl}" alt="${friend.name}" class="w-[52px] h-[52px] rounded-full object-cover border border-zinc-700" />
+              <span class="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center text-[10px] text-zinc-400">
+                <i class="fa-solid fa-lock"></i>
+              </span>
+            </div>
+            <div class="min-w-0">
+              <p class="font-bold text-white text-[15px] truncate">${friend.name}</p>
+              <p class="text-zinc-500 text-sm truncate mt-0.5">${friend.msg}</p>
+            </div>
+          </div>
+          <span class="text-zinc-500 text-xs font-medium flex-shrink-0 ml-2">${friend.time}</span>
+        `;
+
+        row.addEventListener("click", () => {
+          row.classList.remove("locked-chat-shake");
+          void row.offsetWidth;
+          row.classList.add("locked-chat-shake");
+
+          const specialBtn = document.getElementById("btnOpenConversation");
+          if (specialBtn) {
+            specialBtn.classList.add("ring-2", "ring-yellow-400");
+            setTimeout(() => specialBtn.classList.remove("ring-2", "ring-yellow-400"), 900);
+          }
+          showLockedChatToast();
+        });
+
+        container.appendChild(row);
+      });
+    }
+
+    // 7. Phòng Chat AI Trả lời tự động & Giữ nguyên lịch sử
+    function loadSavedChatState() {
+      try {
+        const raw = localStorage.getItem(CHAT_STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed.history) && parsed.history.length > 0) {
+            chatHistory = parsed.history;
+            introChatFinished = Boolean(parsed.introChatFinished);
+          }
+        }
+      } catch (e) {
+        chatHistory = [];
+      }
+    }
+
+    function saveChatState() {
+      try {
+        localStorage.setItem(
+          CHAT_STORAGE_KEY,
+          JSON.stringify({
+            history: chatHistory,
+            introChatFinished
+          })
+        );
+      } catch (e) {}
+      updateChatListPreview();
+    }
+
+    function updateChatListPreview() {
+      const previewEl = document.getElementById("chatPreviewText");
+      if (!previewEl) return;
+      if (chatHistory.length > 0) {
+        const lastMsg = chatHistory[chatHistory.length - 1];
+        previewEl.textContent = lastMsg.role === "user" ? `Bạn: ${lastMsg.text}` : lastMsg.text;
+      } else {
+        previewEl.textContent = CONFIG.chatPreview;
+      }
+    }
+
+    function createSenderBubbleDOM(text) {
+      const senderPhoto = CONFIG.photos[11]?.url || CONFIG.photos[0]?.url;
+      const row = document.createElement("div");
+      row.className = "flex items-end gap-2.5 chat-bubble-enter";
+      row.innerHTML = `
+        <img src="${senderPhoto}" alt="Avatar" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mb-0.5" />
+        <div class="max-w-[78%] px-4 py-2.5 rounded-2xl rounded-bl-md bg-[#262626] text-white text-[14px] leading-snug shadow">
+          ${text}
+        </div>
+      `;
+      return row;
+    }
+
+    function createUserBubbleDOM(text) {
+      const row = document.createElement("div");
+      row.className = "flex items-end justify-end chat-bubble-enter";
+      row.innerHTML = `
+        <div class="max-w-[78%] px-4 py-2.5 rounded-2xl rounded-br-md bg-[#eab308] text-black font-semibold text-[14px] leading-snug shadow">
+          ${text}
+        </div>
+      `;
+      return row;
+    }
+
+    function showTypingBubbleDOM() {
+      removeTypingBubbleDOM();
+      const container = document.getElementById("chatMessagesContainer");
+      const senderPhoto = CONFIG.photos[11]?.url || CONFIG.photos[0]?.url;
+      const typingRow = document.createElement("div");
+      typingRow.id = "activeTypingRow";
+      typingRow.className = "flex items-end gap-2.5 chat-bubble-enter";
+      typingRow.innerHTML = `
+        <img src="${senderPhoto}" alt="Avatar" class="w-7 h-7 rounded-full object-cover flex-shrink-0 mb-0.5" />
+        <div class="px-4 py-3 rounded-2xl rounded-bl-md bg-[#262626] flex items-center">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+      `;
+      container.appendChild(typingRow);
+      scrollChatToBottom();
+    }
+
+    function removeTypingBubbleDOM() {
+      const existing = document.getElementById("activeTypingRow");
+      if (existing) existing.remove();
+    }
+
+    function scrollChatToBottom() {
+      const container = document.getElementById("chatMessagesContainer");
+      if (container) {
+        container.scrollTop = container.scrollHeight;
+      }
+    }
+
+    function renderSavedChatMessages() {
+      const container = document.getElementById("chatMessagesContainer");
+      container.innerHTML = "";
+      chatHistory.forEach((msg) => {
+        if (msg.role === "user") {
+          container.appendChild(createUserBubbleDOM(msg.text));
+        } else {
+          container.appendChild(createSenderBubbleDOM(msg.text));
+        }
+      });
+      scrollChatToBottom();
+    }
+
+    function openChatRoomScreen() {
+      showScreen("screenChatRoom");
+      const container = document.getElementById("chatMessagesContainer");
+
+      // Nếu đã có lịch sử chat trước đó, hiển thị ngay mà KHÔNG reset
+      if (chatHistory.length > 0 || introChatFinished) {
+        renderSavedChatMessages();
+        return;
+      }
+
+      // Lần đầu tiên mở phòng chat: Chạy lần lượt 4 tin nhắn chúc mừng sinh nhật
+      container.innerHTML = "";
+      introTypingTimeouts.forEach((t) => clearTimeout(t));
+      introTypingTimeouts = [];
+
+      let cumulativeDelay = 300;
+      showTypingBubbleDOM();
+
+      CONFIG.chatMessages.forEach((msgText, idx) => {
+        const t1 = setTimeout(() => {
+          removeTypingBubbleDOM();
+          chatHistory.push({ role: "sender", text: msgText });
+          container.appendChild(createSenderBubbleDOM(msgText));
+          saveChatState();
+          scrollChatToBottom();
+
+          if (idx < CONFIG.chatMessages.length - 1) {
+            showTypingBubbleDOM();
+          } else {
+            introChatFinished = true;
+            saveChatState();
+          }
+        }, cumulativeDelay + 950);
+
+        introTypingTimeouts.push(t1);
+        cumulativeDelay += 1250;
+      });
+    }
+
+    function generateSmartAiReply(userText) {
+      const normalized = userText.toLowerCase().trim();
+      for (const item of CONFIG.aiKeywordReplies) {
+        if (item.keywords.some((kw) => normalized.includes(kw))) {
+          return item.reply;
+        }
+      }
+      const reply = CONFIG.aiFallbackReplies[fallbackReplyIndex % CONFIG.aiFallbackReplies.length];
+      fallbackReplyIndex++;
+      return reply;
+    }
+
+    async function handleSendUserMessage(rawText) {
+      const text = (rawText || "").trim();
+      if (!text) return;
+
+      // Nếu 4 câu mở đầu chưa chạy xong, hoàn tất ngay để không bị chồng tin nhắn
+      if (!introChatFinished) {
+        introTypingTimeouts.forEach((t) => clearTimeout(t));
+        introTypingTimeouts = [];
+        removeTypingBubbleDOM();
+        const existingTexts = new Set(chatHistory.map((m) => m.text));
+        CONFIG.chatMessages.forEach((m) => {
+          if (!existingTexts.has(m)) {
+            chatHistory.push({ role: "sender", text: m });
+          }
+        });
+        introChatFinished = true;
+        renderSavedChatMessages();
+      }
+
+      const container = document.getElementById("chatMessagesContainer");
+      chatHistory.push({ role: "user", text });
+      container.appendChild(createUserBubbleDOM(text));
+      saveChatState();
+      scrollChatToBottom();
+
+      if (isAiReplying) return;
+      isAiReplying = true;
+
+      const statusEl = document.getElementById("chatAiStatusText");
+      if (statusEl) statusEl.textContent = "Đang nhập tin nhắn...";
+      showTypingBubbleDOM();
+
+      setTimeout(() => {
+        removeTypingBubbleDOM();
+        const aiReply = generateSmartAiReply(text);
+        chatHistory.push({ role: "sender", text: aiReply });
+        container.appendChild(createSenderBubbleDOM(aiReply));
+        saveChatState();
+        scrollChatToBottom();
+        if (statusEl) statusEl.textContent = "Đang hoạt động • AI Trả lời tự động";
+        isAiReplying = false;
+      }, 1150);
+    }
+
+    // 8. Bánh kem Sinh nhật 3D 2 tầng xoay & Pháo hoa
+    let cakeRotY = 0;
+    let cakeAnimFrame = null;
+    let isDraggingCake = false;
+    let dragStartX = 0;
+    let fireworksAnimFrame = null;
+    let fireworksParticles = [];
+
+    function buildTierCylinder(containerId, panelCount, radius, width, height) {
+      const tier = document.getElementById(containerId);
+      if (!tier) return;
+      tier.innerHTML = "";
+      tier.style.width = `${width}px`;
+      tier.style.height = `${height}px`;
+      tier.style.marginLeft = `${-width / 2}px`;
+
+      const lid = document.createElement("div");
+      lid.className = "cake-lid";
+      lid.style.width = `${ radius * 2 }px`;
+      lid.style.height = `${ radius * 2 }px`;
+      lid.style.left = `${ width / 2 - radius }px`;
+      lid.style.top = `${ -radius }px`;
+      tier.appendChild(lid);
+
+      const angleStep = 360 / panelCount;
+      for (let i = 0; i < panelCount; i++) {
+        const photoUrl = CONFIG.photos[i % CONFIG.photos.length]?.url || "";
+        const panel = document.createElement("div");
+        panel.className = "cake-panel";
+        panel.style.width = `${width}px`;
+        panel.style.height = `${height}px`;
+        panel.style.transform = `rotateY(${i * angleStep}deg) translateZ(${radius}px)`;
+        panel.innerHTML = `<img src="${photoUrl}" alt="Cake memory" />`;
+        tier.appendChild(panel);
+      }
+    }
+
+    function build3DCakeTiers() {
+      buildTierCylinder("cakeTopTier", 10, 74, 49, 108);
+      buildTierCylinder("cakeBottomTier", 14, 118, 55, 132);
+    }
+
+    function spawnFireworkBurst(x, y) {
+      const colors = ["#facc15", "#fb7185", "#38bdf8", "#a855f7", "#4ade80", "#ffffff"];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      for (let i = 0; i < 36; i++) {
+        const angle = (Math.PI * 2 * i) / 36 + (Math.random() - 0.5) * 0.2;
+        const speed = 1.4 + Math.random() * 3.4;
+        fireworksParticles.push({
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          alpha: 1,
+          color,
+          size: 1.8 + Math.random() * 2
+        });
+      }
+    }
+
+    function startCake3DAnimation() {
+      const cakeObj = document.getElementById("cake3DObject");
+      const canvas = document.getElementById("fireworksCanvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = canvas.offsetWidth || 400;
+      canvas.height = canvas.offsetHeight || 800;
+
+      spawnFireworkBurst(canvas.width * 0.3, canvas.height * 0.25);
+      spawnFireworkBurst(canvas.width * 0.75, canvas.height * 0.32);
+
+      let frameCounter = 0;
+      function loop() {
+        frameCounter++;
+        if (!isDraggingCake) {
+          cakeRotY += 0.45;
+        }
+        if (cakeObj) {
+          cakeObj.style.transform = `rotateX(-13deg) rotateY(${cakeRotY}deg)`;
+        }
+
+        ctx.fillStyle = "rgba(4, 7, 17, 0.22)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (frameCounter % 55 === 0) {
+          spawnFireworkBurst(
+            40 + Math.random() * (canvas.width - 80),
+            50 + Math.random() * (canvas.height * 0.45)
+          );
+        }
+
+        for (let i = fireworksParticles.length - 1; i >= 0; i--) {
+          const p = fireworksParticles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.035;
+          p.alpha -= 0.016;
+
+          if (p.alpha <= 0) {
+            fireworksParticles.splice(i, 1);
+            continue;
+          }
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        cakeAnimFrame = requestAnimationFrame(loop);
+      }
+
+      if (cakeAnimFrame) cancelAnimationFrame(cakeAnimFrame);
+      cakeAnimFrame = requestAnimationFrame(loop);
+    }
+
+    function stopCake3DAnimation() {
+      if (cakeAnimFrame) cancelAnimationFrame(cakeAnimFrame);
+      cakeAnimFrame = null;
+    }
+
+    // 9. Nhạc nền (Hỗ trợ cả file .mp3 và giai điệu hộp nhạc dự phòng)
+    function startBackgroundMusic() {
+      const audioEl = document.getElementById("bgMusicAudio");
+      isMusicPlaying = true;
+      updateMusicButtonUI();
+
+      if (CONFIG.musicUrl) {
+        audioEl.play().catch(() => {
+          startSynthBirthdayMelody();
+        });
+      } else {
+        startSynthBirthdayMelody();
+      }
+    }
+
+    function startSynthBirthdayMelody() {
+      if (melodyTimer) return;
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+      if (!audioCtx) audioCtx = new AudioContextClass();
+
+      const notes = [261.63, 261.63, 293.66, 261.63, 349.23, 329.63, 261.63, 261.63, 293.66, 261.63, 392.0, 349.23];
+      let noteIdx = 0;
+
+      melodyTimer = setInterval(() => {
+        if (!isMusicPlaying) return;
+        try {
+          if (audioCtx.state === "suspended") audioCtx.resume();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = "sine";
+          osc.frequency.value = notes[noteIdx % notes.length];
+          gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0008, audioCtx.currentTime + 0.55);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.55);
+          noteIdx++;
+        } catch (e) {}
+      }, 620);
+    }
+
+    function toggleBackgroundMusic() {
+      const audioEl = document.getElementById("bgMusicAudio");
+      isMusicPlaying = !isMusicPlaying;
+      if (isMusicPlaying) {
+        startBackgroundMusic();
+      } else {
+        audioEl.pause();
+        if (melodyTimer) {
+          clearInterval(melodyTimer);
+          melodyTimer = null;
+        }
+      }
+      updateMusicButtonUI();
+    }
+
+    function updateMusicButtonUI() {
+      const icon = document.getElementById("musicIcon");
+      if (!icon) return;
+      icon.className = isMusicPlaying ? "fa-solid fa-music text-xs animate-spin" : "fa-solid fa-volume-xmark text-xs text-zinc-400";
+    }
+
+    // ============================================================================
+    // GẮN SỰ KIỆN TƯƠNG TÁC
+    // ============================================================================
+    window.addEventListener("DOMContentLoaded", () => {
+      initAppUI();
+
+      // Mở quà từ màn hình Intro
+      document.getElementById("btnStartIntro").addEventListener("click", () => {
+        startBackgroundMusic();
+        showScreen("screenMainGrid");
+      });
+
+      document.getElementById("btnToggleMusic").addEventListener("click", toggleBackgroundMusic);
+
+      // Mở Rollcall
+      document.getElementById("btnOpenRollcall").addEventListener("click", () => showScreen("screenRollcall"));
+      document.getElementById("btnViewerOpenRollcall").addEventListener("click", () => showScreen("screenRollcall"));
+      document.getElementById("btnCloseRollcall").addEventListener("click", () => showScreen("screenMainGrid"));
+
+      // Mở Danh sách bạn bè ("Tất cả bạn bè ⌄")
+      document.getElementById("btnPeopleFilter").addEventListener("click", () => openModal("modalCustomPhotos"));
+      document.getElementById("btnViewerPeopleFilter").addEventListener("click", () => openModal("modalCustomPhotos"));
+      document.getElementById("btnCloseCustomModal").addEventListener("click", () => closeModal("modalCustomPhotos"));
+
+      // Mở Lịch kỷ niệm
+      document.getElementById("btnOpenCalendar").addEventListener("click", () => openModal("screenCalendar"));
+      document.getElementById("btnViewerOpenCalendar").addEventListener("click", () => openModal("screenCalendar"));
+      document.getElementById("btnChatDockCalendar").addEventListener("click", () => openModal("screenCalendar"));
+      document.getElementById("btnCloseCalendar").addEventListener("click", () => closeModal("screenCalendar"));
+
+      // Mở Bánh kem 3D
+      document.getElementById("btnCenterLocket").addEventListener("click", () => showScreen("screenCake3D"));
+      document.getElementById("btnProfileAvatar").addEventListener("click", () => showScreen("screenCake3D"));
+      document.getElementById("btnViewerOpenCake").addEventListener("click", () => showScreen("screenCake3D"));
+      document.getElementById("btnCloseCake3D").addEventListener("click", () => showScreen("screenMainGrid"));
+
+      // Mở Danh sách Chat & Phòng Chat AI
+      document.getElementById("btnOpenChatList").addEventListener("click", () => showScreen("screenChatList"));
+      document.getElementById("btnViewerOpenChat").addEventListener("click", () => showScreen("screenChatList"));
+      document.getElementById("btnCloseChatList").addEventListener("click", () => showScreen("screenMainGrid"));
+      document.getElementById("btnOpenConversation").addEventListener("click", () => openChatRoomScreen());
+      document.getElementById("btnNewChatCompose").addEventListener("click", () => openChatRoomScreen());
+      document.getElementById("btnBackToChatList").addEventListener("click", () => showScreen("screenChatList"));
+
+      // Nút phát lại 4 tin nhắn mở đầu (khi người dùng chủ động bấm)
+      document.getElementById("btnResetChatHistory").addEventListener("click", () => {
+        localStorage.removeItem(CHAT_STORAGE_KEY);
+        chatHistory = [];
+        introChatFinished = false;
+        openChatRoomScreen();
+      });
+
+      // Gửi tin nhắn trong phòng Chat AI
+      const chatInput = document.getElementById("chatInputBox");
+      const sendIcon = document.getElementById("sendBtnIcon");
+      chatInput.addEventListener("input", () => {
+        if (chatInput.value.trim().length > 0) {
+          sendIcon.className = "fa-solid fa-paper-plane text-yellow-400";
+        } else {
+          sendIcon.className = "fa-regular fa-face-smile";
+        }
+      });
+
+      chatInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && chatInput.value.trim()) {
+          e.preventDefault();
+          const val = chatInput.value;
+          chatInput.value = "";
+          sendIcon.className = "fa-regular fa-face-smile";
+          handleSendUserMessage(val);
+        }
+      });
+
+      document.getElementById("btnSendUserMsg").addEventListener("click", () => {
+        if (chatInput.value.trim()) {
+          const val = chatInput.value;
+          chatInput.value = "";
+          sendIcon.className = "fa-regular fa-face-smile";
+          handleSendUserMessage(val);
+        } else {
+          handleSendUserMessage("😊💛");
+        }
+      });
+
+      document.querySelectorAll(".emoji-react-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const emo = btn.getAttribute("data-emoji");
+          handleSendUserMessage(emo);
+        });
+      });
+
+      // Tương tác trong màn hình Xem ảnh đơn
+      document.getElementById("btnCloseViewer").addEventListener("click", () => showScreen("screenMainGrid"));
+      document.getElementById("btnAutoPlayToggle").addEventListener("click", toggleAutoPlaySlideshow);
+      document.getElementById("btnDownloadPhoto").addEventListener("click", () => burstGiftRain(12));
+      document.getElementById("btnSendPaperPlane").addEventListener("click", () => burstGiftRain(10));
+
+      document.querySelectorAll(".viewer-react-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const emo = btn.getAttribute("data-emoji");
+          burstGiftRain(8, emo);
+        });
+      });
+
+      const viewerQuickInput = document.getElementById("viewerQuickInput");
+      viewerQuickInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && viewerQuickInput.value.trim()) {
+          const msg = viewerQuickInput.value.trim();
+          viewerQuickInput.value = "";
+          openChatRoomScreen();
+          setTimeout(() => handleSendUserMessage(msg), 250);
+        }
+      });
+
+      // Chạm hoặc vuốt ngang trên khung ảnh đơn để chuyển ảnh
+      const viewerCard = document.getElementById("viewerCardArea");
+      let touchStartX = 0;
+      viewerCard.addEventListener("pointerdown", (e) => {
+        touchStartX = e.clientX;
+      });
+      viewerCard.addEventListener("pointerup", (e) => {
+        const diff = e.clientX - touchStartX;
+        if (Math.abs(diff) > 35) {
+          if (diff < 0) nextPhoto();
+          else prevPhoto();
+        } else {
+          nextPhoto();
+        }
+      });
+
+      // Vuốt xoay bánh kem 3D và chạm bắn pháo hoa
+      const cakeArea = document.getElementById("cakeTouchArea");
+      cakeArea.addEventListener("pointerdown", (e) => {
+        isDraggingCake = true;
+        dragStartX = e.clientX;
+        const canvas = document.getElementById("fireworksCanvas");
+        const rect = canvas.getBoundingClientRect();
+        spawnFireworkBurst(e.clientX - rect.left, e.clientY - rect.top);
+      });
+
+      window.addEventListener("pointermove", (e) => {
+        if (!isDraggingCake) return;
+        const deltaX = e.clientX - dragStartX;
+        cakeRotY += deltaX * 0.55;
+        dragStartX = e.clientX;
+      });
+
+      window.addEventListener("pointerup", () => {
+        isDraggingCake = false;
+      });
+    });
+  </script>
+</body>
+</html>

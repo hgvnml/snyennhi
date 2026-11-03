@@ -1,0 +1,24 @@
+========================================================================
+HƯỚNG DẪN TỰ CHỈNH SỬA BỘ CODE QUÀ TẶNG SINH NHẬT LOCKET 3D
+========================================================================
+
+Cấu trúc thư mục sau khi giải nén:
+├── index.html          -> File chạy chính (Mở bằng Chrome / Edge / Safari)
+├── config.js           -> NƠI BẠN CHỈNH SỬA ẢNH, NHẠC, TÊN & TIN NHẮN
+├── style.css           -> File hiệu ứng giao diện & Bánh kem 3D
+├── script.js           -> File xử lý logic, pháo hoa & AI trả lời tự động
+├── images/             -> Thư mục để bạn bỏ ảnh kỷ niệm vào (ví dụ: 1.jpg, 2.jpg...)
+├── music/              -> Thư mục để bạn bỏ nhạc nền MP3 vào (ví dụ: nhac.mp3)
+└── Ban_Gop_1_File/     -> Chứa bản gộp tất cả trong 1 file index.html duy nhất
+
+------------------------------------------------------------------------
+CÁCH THAY ẢNH & NHẠC CỰC NHANH:
+1. Bỏ các tấm ảnh của bạn vào thư mục "images/" (đặt tên 1.jpg, 2.jpg, ..., 15.jpg).
+2. Mở file "config.js" bằng Notepad hoặc VS Code.
+3. Trong phần "photos", sửa đường dẫn thành:
+   { url: "images/1.jpg", caption: "So sweet! 💕" },
+   { url: "images/2.jpg", caption: "Always together 💞" },
+4. Nếu có nhạc MP3, bỏ vào thư mục "music/nhac.mp3" và sửa dòng:
+   musicUrl: "music/nhac.mp3",
+5. Nhấn Ctrl + S để lưu lại, sau đó mở "index.html" để thưởng thức!
+========================================================================
